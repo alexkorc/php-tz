@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div style="display: inline-block;">
+        <?php echo $tree; ?>
+    </div>
+    <div style="display: inline-block; margin-left: 100px;" id="desc">
+        
+    </div>
+    <div>
+    <a href='index.php?section=admin'>to admin</a>
+    </div>
+
+    <script>
+        var items = document.getElementsByName("i");
+        for(var i = 0; i < items.length; i++) {
+            items[i].addEventListener("click", function(e){
+                if(e.target.innerHTML == "+")
+                    e.target.innerHTML = "-";
+                else
+                e.target.innerHTML = "+";
+                var id = (e.target.id).substr(1);
+                var childrens = document.querySelectorAll('[data-parent-id=p'+id+']');
+                for(var j = 0; j < childrens.length; j++) {
+                    if(childrens[j].style.display == "block") {
+                        childrens[j].style.display = "none";
+                    } else {
+                        childrens[j].style.display = "block";
+                    }
+                }
+
+            });
+        }
+        var lies = document.getElementsByName("l");
+        for(var i = 0; i < lies.length; i++) {
+            lies[i].addEventListener("click", function(e) {
+                if(e.target.dataset.description)
+                    document.getElementById("desc").innerHTML = e.target.dataset.description;
+            });
+        }
+    </script>
+</body>
+</html>
